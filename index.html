@@ -64,7 +64,9 @@
     $.get('./data.csv', function(csvString) {
 
       // Use PapaParse to transform file into arrays
-      var data = Papa.parse(csvString).data.map(function(a) {
+      var data = Papa.parse(csvString.trim()).data.filter(
+        function(row) { return row.length === 2 }
+      ).map(function(a) {
         return [ parseFloat(a[0]), parseFloat(a[1]) ]
       })
 
